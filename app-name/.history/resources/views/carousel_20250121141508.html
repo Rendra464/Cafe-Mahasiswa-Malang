@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="bg-[#0B7941] h-24 px-5 flex items-center justify-between">
+        <div class="flex items-center">
+            <img src="{{ URL('Logo.png') }}" alt="Logo" class="ml-5 w-12 h-12">
+            <a href="/" class="ml-3 text-white font-bold text-xl" style="font-family: Inter, sans-serif;">
+                Kampung Mahasiswa Malang
+            </a>
+        </div>
+
+        <button class="block md:hidden focus:outline-none text-white" id="menu-toggle">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+
+        <div id="nav-links" class="hidden md:flex flex-col md:flex-row items-center md:space-x-6 md:space-y-0 space-y-4 mt-4 md:mt-0">
+            <a href="/Shop" class="text-white font-bold hover:text-[#444444]" style="font-family: Inter, sans-serif;">Shop Now</a>
+            <a href="#" id="About-us" class="text-white font-bold hover:text-[#444444]" style="font-family: Inter, sans-serif;">About Us</a>
+            <div class="relative group">
+                <button class="text-white font-bold hover:text-[#444444]" style="font-family: Inter, sans-serif;">
+                    Product
+                </button>
+                <div class="hidden group-hover:block bg-white shadow-lg mt-2 py-2 w-48 md:absolute">
+                    <a href="/Menu-Coffee" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Coffee</a>
+                    <a href="/Menu-NonCoffee" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">NonCoffee</a>
+                    <a href="/Menu-ModernDrink" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">ModernDrink</a>
+                    <a href="/Menu-TraditionalDrink" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">TraditionalDrink</a>
+                    <a href="/Menu-Food" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Food</a>
+                    <a href="/Menu-Snack" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Snack</a>
+                </div>
+            </div>
+            <a href="/Contact-Us" class="text-white font-bold hover:text-[#444444]" style="font-family: Inter, sans-serif;">Contact Us</a>
+
+            @if (Route::has('login'))
+                @auth
+                    <div class="relative">
+                        <button id="user-menu" class="text-white font-bold hover:text-gray-300">{{ Auth::user()->name }}</button>
+                        <div id="user-menu-dropdown" class="hidden absolute right-0 bg-white shadow-lg mt-2 py-2 w-48">
+                            <a href="{{ route('logout') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="text-white font-bold hover:text-gray-300">Log in</a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="text-white font-bold hover:text-gray-300">Register</a>
+                    @endif
+                @endauth
+            @endif
+        </div>
+    </nav>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('hidden');
+            navLinks.classList.toggle('flex');
+        });
+
+        const aboutUsLink = document.getElementById('About-us');
+        if (aboutUsLink) {
+            aboutUsLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                const aboutSection = document.getElementById('about-section');
+                if (aboutSection) {
+                    aboutSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+
+        const userMenu = document.getElementById('user-menu');
+        const userMenuDropdown = document.getElementById('user-menu-dropdown');
+        if (userMenu) {
+            userMenu.addEventListener('click', () => {
+                userMenuDropdown.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

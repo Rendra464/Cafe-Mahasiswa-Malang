@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<nav class="flex items-center justify-between bg-[#0B7941] h-24 px-5">
+    <div class="flex items-center">
+        <img src="{{ URL('Logo.png') }}" alt="Logo" class="ml-5 w-12 h-12">
+        <a href="/" class="ml-3 font-bold text-white text-xl" style="font-family: Inter, sans-serif;">Kampung Mahasiswa Malang</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="block md:hidden focus:outline-none" id="menu-toggle">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+    </button>
+
+    <!-- Navbar Links -->
+    <div id="nav-links" class="hidden md:flex flex-col md:flex-row items-center space-y-4 md:space-y-0 space-x-0 md:space-x-6 mr-5">
+        <a href="/Shop" class="font-bold text-[#FFFFFF] hover:text-[#444444]" style="font-family: Inter, sans-serif;">Shop Now</a>
+        <a href="#" id="About-us" class="font-bold text-[#FFFFFF] hover:text-[#444444]" style="font-family: Inter, sans-serif;">About Us</a>
+
+        <div x-data="{ open: false }" class="relative" @mouseenter="open = true" @mouseleave="open = false">
+            <a href="#" class="font-bold text-[#FFFFFF] hover:text-[#444444]" style="font-family: Inter, sans-serif;">Product</a>
+            <div x-show="open" class="absolute bg-white shadow-lg mt-1 py-2 w-48 hidden md:block" style="z-index: 999;">
+                <a href="/Menu-Coffee" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Coffee</a>
+                <a href="/Menu-NonCoffee" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">NonCoffee</a>
+                <a href="/Menu-ModernDrink" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">ModernDrink</a>
+                <a href="/Menu-TraditionalDrink" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">TraditionalDrink</a>
+                <a href="/Menu-Food" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Food</a>
+                <a href="/Menu-Snack" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Snack</a>
+            </div>
+        </div>
+
+        <a href="/Contact-Us" id="Contact-us" class="font-bold text-[#FFFFFF] hover:text-[#444444] mr-20" style="font-family: Inter, sans-serif;">Contact Us</a>
+
+        @if (Route::has('login'))
+            @auth
+                <div class="relative">
+                    <button class="font-bold text-white hover:text-gray-300" id="user-menu">
+                        {{ Auth::user()->name }}
+                    </button>
+                    <div class="hidden absolute right-0 bg-white shadow-lg mt-2 py-2 w-48" id="user-menu-dropdown">
+                        <a href="{{ route('logout') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+            @else
+                <a href="{{ route('login') }}" class="font-bold text-white hover:text-gray-300">Log in</a>
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="font-bold text-white hover:text-gray-300">Register</a>
+                @endif
+            @endauth
+        @endif
+    </div>
+</nav>
+
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    // Toggle mobile menu
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('hidden');
+    });
+
+    // Dropdown menu toggle for user menu
+    const userMenu = document.getElementById('user-menu');
+    const dropdown = document.getElementById('user-menu-dropdown');
+
+    if (userMenu) {
+        userMenu.addEventListener('click', () => {
+            dropdown.classList.toggle('hidden');
+        });
+    }
+
+    // Smooth scroll for "About Us"
+    document.getElementById("About-us").addEventListener("click", function (event) {
+        event.preventDefault();
+        const aboutSection = document.getElementById("about-section");
+        if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: "smooth" });
+        }
+    });
+</script>
+</body>
+</html>

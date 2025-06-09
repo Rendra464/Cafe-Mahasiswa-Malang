@@ -1,0 +1,257 @@
+<link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+
+<style>
+#headercafe {
+    display:block;
+    width: 100%;
+    height: 500px;
+}
+
+#Tittle{
+    font-family: "Inter", sans-serif;
+    color: #FFFFFF;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#Tittle:hover {
+    color: #5F5D5E;
+}
+
+#TittleCafe{
+    font-family: "Inter", sans-serif;
+    color: #FFFFFF;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#TittlePage{
+    font-family: "Inter", sans-serif;
+    color: #5F5D5E;
+    font-size: 30px;
+    text-align: left;
+    font-weight: bold;
+    margin-left: 70px;
+}
+
+#Description{
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color: #5F5D5E;
+}
+
+.custom-button {
+    font-family: "Inter", sans-serif;
+    background-color: #5F5D5E;
+    border: none;
+    width: 243px;
+    height: 40px;
+    color: white;
+    /* padding: 10px 20px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    font-weight:Bold;
+}
+.custom-button:hover {
+    background-color: #073C21;
+}
+
+.fa-brands{
+    font-size:35px
+}
+
+.DesktopView{
+    display:block !important;
+}
+
+.ResponsiveView{
+    display:none !important;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.card {
+    width: 280px;
+    height: 360px;
+    border-radius: 15px;
+    padding: 1.5rem;
+    background: white;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    transition: 0.4s ease-out;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+    transform: translateY(20px);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover .info {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+}
+
+.info {
+    margin-top:100px;
+    position: relative;
+    z-index: 3;
+    color: white;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s;
+}
+
+.info h1 {
+    margin: 0px;
+}
+
+.info p {
+    letter-spacing: 1px;
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+.info button {
+    padding: 0.6rem;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.info button:hover {
+    background: #0B7941;
+    color: #FFFFFF;
+}
+
+.navbar {
+    background-color: #f8f9fa;
+}
+.nav-link {
+    color: #555;
+}
+.nav-link:hover {
+    color: #000;
+}
+
+.ml-auto, .mx-auto {
+    margin-left: auto !important;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+}
+
+
+@media screen and (max-width: 900px){
+    .Desktop{
+        display:none !important;
+    }
+
+    .Responsive{
+        display:block !important;
+        width:100%;
+        overflow-x: hidden;
+    }
+
+    h1{
+        font-size:20px;
+    }
+}
+
+
+</style>
+</style>
+
+@include('Header')
+<div class="Desktop">
+<div style="text-align: center; position: relative;">
+    <div id="imageCarousel" class="carousel slide" data-ride="carousel" data-bs-interval="3000" data-bs-wrap="true">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ URL('LandingPage.JPEG') }}" class="d-block w-100" alt="First slide" id="headercafe">
+            </div>
+                <div class="carousel-item">
+                <img src="{{ URL('IMG_9792.JPEG') }}" class="d-block w-100" alt="Second slide" id="headercafe">
+            </div>
+                <div class="carousel-item">
+                <img src="{{ URL('IMG_9793.JPEG') }}" class="d-block w-100" alt="Third slide" id="headercafe">
+            </div>
+            <img src="{{ URL('Logo.png') }}" alt="" style="position: absolute; top: 20%; left: 45%; width: 160px; height: 167px;">
+                <div id="TittleCafe" style="position: absolute; top: 60%; left: 51%; transform: translate(-50%, 0%);">KAMPUNG MAHASISWA MALANG</div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+</div>
+<div class="Responsive">
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
